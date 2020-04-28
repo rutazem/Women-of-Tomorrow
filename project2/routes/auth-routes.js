@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
+require('dotenv').config()
+
+
 // User model
 const User = require('../models/user-model');
 
@@ -19,10 +22,25 @@ router.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('private', { user: req.user });
 });
 
+/////// LINKEDIN PATH
+router.get('/auth/linkedin',
+  passport.authenticate('linkedin', { state: 'SOME STATE' }),
+  function (req, res) {
+    // The request will be redirected to LinkedIn for authentication, so this
+    // function will not be called.
+  });
+// the login callback:
 
+router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
 
 
 ////////////////////////// SIGN UP
+///////// CREATE EPARATE ROUTES FOR METEE AND MENTOR in auth
+// auth/signup_mentor
+// auth/signup_mentee
 
 //////// SHOWS YOU THE SIGN UP FORM
 router.get('/signup', (req, res, next) => {

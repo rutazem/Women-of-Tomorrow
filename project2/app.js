@@ -10,6 +10,12 @@ const logger = require('morgan');
 const path = require('path');
 const flash = require('connect-flash');
 
+// const db = require('db')
+// db.connect({
+//   clientID: process.env.LINKEDIN_KEY,
+//   clientSecret: process.env.LINKEDIN_SECRET,
+// })
+
 
 
 // app.js
@@ -17,6 +23,9 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+
+
+
 
 
 const index = require('./routes/index');
@@ -28,6 +37,31 @@ const app = express();
 
 /////////////FLASH
 app.use(flash());
+
+////////////////// LINKED IN STRATEGY
+
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+
+passport.use(new LinkedInStrategy({
+
+  clientID: '86wwwbio73aivd',
+  clientSecret: 'NRWpLoqmA6DV1SHp',
+  //clientID: LINKEDIN_KEY,
+  //clientSecret: LINKEDIN_SECRET,
+  callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
+  scope: ['r_emailaddress', 'r_basicprofile',],
+  state: true,
+}, function (accessToken, refreshToken, profile, done) {
+  // asynchronous verification, for effect...
+  process.nextTick(function () {
+    // To keep the example simple, the user's LinkedIn profile is returned to
+    // represent the logged-in user. In a typical application, you would want
+    // to associate the LinkedIn account with a user record in your database,
+    // and return that user instead.
+    return done(null, profile);
+  });
+}));
+
 
 
 ///////// MONGOOSE SET UP
