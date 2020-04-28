@@ -5,6 +5,7 @@ const userSchema = new Schema({
   // Log-in Data
   username: String,
   password: String,
+  
   role: {
     type: String,
     enum: ['Mentor', 'Mentee']
@@ -55,6 +56,7 @@ const userSchema = new Schema({
   position: {
     type: String
   },
+  
   LinkedInProfile: {
     type: String,
     validate: {

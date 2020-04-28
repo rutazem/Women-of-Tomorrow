@@ -43,24 +43,24 @@ router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
 // auth/signup_mentee
 
 //////// SHOWS YOU THE SIGN UP FORM
-router.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
+router.get('/signup-mentor', (req, res, next) => {
+  res.render('auth/signup-mentor');
 });
 
 
 //////// SENDS USER INFO TO THE DATABASE
-router.post('/signup', (req, res, next) => {
+router.post('/signup-mentor', (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    res.render('auth/signup', { message: 'Indicate username and password' });
+    res.render('auth/signup-mentor', { message: 'Indicate username and password' });
     return;
   }
 
   User.findOne({ username })
     .then(user => {
       if (user !== null) {
-        res.render('auth/signup', { message: 'The username already exists' });
+        res.render('auth/signup-mentor', { message: 'The username already exists' });
         return;
       }
 
@@ -78,7 +78,7 @@ router.post('/signup', (req, res, next) => {
       res.redirect('/');
     })
     .catch(error => {
-      res.render('auth/signup', { message: 'Something went wrong' });
+      res.render('auth/signup-mentor', { message: 'Something went wrong' });
     });
 });
 

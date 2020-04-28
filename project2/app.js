@@ -29,7 +29,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 
 const index = require('./routes/index');
-const router = require('./routes/auth-routes');
+const router = require('./routes/auth-mentor');
 
 const app = express();
 
