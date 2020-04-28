@@ -24,11 +24,12 @@ router.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 /////// LINKEDIN PATH
 router.get('/auth/linkedin',
-  passport.authenticate('linkedin', { state: 'SOME STATE' }),
-  function (req, res) {
-    // The request will be redirected to LinkedIn for authentication, so this
-    // function will not be called.
-  });
+  passport.authenticate('linkedin')
+)
+
+// The request will be redirected to LinkedIn for authentication, so this
+// function will not be called.
+
 // the login callback:
 
 router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {

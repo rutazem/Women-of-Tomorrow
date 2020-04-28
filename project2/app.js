@@ -25,6 +25,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
+const User = require('./models/user-model')
 
 
 
@@ -44,22 +45,41 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 passport.use(new LinkedInStrategy({
 
-  clientID: '86wwwbio73aivd',
-  clientSecret: 'NRWpLoqmA6DV1SHp',
-  //clientID: LINKEDIN_KEY,
-  //clientSecret: LINKEDIN_SECRET,
+ 
+  clientID: process.env.LINKEDIN_KEY,
+  clientSecret: process.env.LINKEDIN_SECRET,
   callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
-  scope: ['r_emailaddress', 'r_basicprofile',],
-  state: true,
+  scope: ['r_emailaddress', 'r_liteprofile'],
+  // state: true,
 }, function (accessToken, refreshToken, profile, done) {
   // asynchronous verification, for effect...
-  process.nextTick(function () {
-    // To keep the example simple, the user's LinkedIn profile is returned to
-    // represent the logged-in user. In a typical application, you would want
-    // to associate the LinkedIn account with a user record in your database,
-    // and return that user instead.
-    return done(null, profile);
-  });
+
+  console.log('im here', profile)
+
+  User.findOne({ linkedinID: profile.id })
+    .then(user => {
+      if (user) {
+        done(null, user);
+        return;
+      }
+
+      User.create({ linkedinID: profile.id })
+        .then(newUser => {
+          done(null, newUser);
+        })
+        .catch(err => done(err)); // closes User.create()
+    })
+    .catch(err => done(err)); // closes User.findOne()
+
+  // process.nextTick(function () {
+
+  //   // To keep the example simple, the user's LinkedIn profile is returned to
+  //   // represent the logged-in user. In a typical application, you would want
+  //   // to associate the LinkedIn account with a user record in your database,
+  //   // and return that user instead.
+  //   return done(null, profile);
+  // });
+
 }));
 
 
