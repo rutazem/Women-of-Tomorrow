@@ -49,6 +49,13 @@ router.get('/signup-mentor', (req, res, next) => {
 });
 
 
+////OLGA, HERE'S YOUR PATH FOR THE SIGNUP
+router.get('/signup-mentee', (req, res, next) => {
+  res.render('auth/signup-mentee');
+});
+
+
+
 //////// SENDS USER INFO TO THE DATABASE
 router.post('/signup-mentor', (req, res, next) => {
   const { username, password } = req.body;
