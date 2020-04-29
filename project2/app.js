@@ -31,6 +31,7 @@ const User = require('./models/user-model')
 
 const index = require('./routes/index');
 const router = require('./routes/auth-mentor');
+const route_mentee = require('./routes/auth-mentee')
 
 const app = express();
 
@@ -187,9 +188,9 @@ passport.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/', router);
+app.use('/', router)
 app.use('/', index);
-
+app.use('/', route_mentee);
 
 
 module.exports = app;
