@@ -18,9 +18,7 @@ const ensureLogin = require('connect-ensure-login');
 
 
 
-router.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('private', { user: req.user });
-});
+
 
 /////// LINKEDIN PATH
 router.get('/auth/linkedin',
@@ -100,9 +98,9 @@ router.get('/login', (req, res, next) => {
 });
 
 
-router.get('/login', (req, res, next) => {
-  res.render('auth/login', { message: req.flash('error') });
-});
+// router.get('/login', (req, res, next) => {
+//   res.render('auth/login', { message: req.flash('error') });
+// });
 
 
 
@@ -110,15 +108,27 @@ router.get('/login', (req, res, next) => {
 /////// CREATE SEPARATE LANDING PAGES after log in
 // SEPARATE MENTORS AND MENTEES
 
+
+
+
+
+router.get('/mentor-space', ensureLogin.ensureLoggedIn(), (req, res) => {
+  res.render('spaces/mentor-space', { user: req.user });
+});
+
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/mentor-space',
     failureRedirect: '/login',
     failureFlash: true,
     passReqToCallback: true
   })
 );
+
+
+
+
 
 
 
