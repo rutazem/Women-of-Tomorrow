@@ -5,7 +5,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
 const hbs = require('hbs');
+const session = require('express-session');
 const mongoose = require('mongoose');
+const MongoStore = require("connect-mongo")(session);
 const logger = require('morgan');
 const path = require('path');
 const flash = require('connect-flash');
@@ -19,7 +21,7 @@ const flash = require('connect-flash');
 
 
 // app.js
-const session = require('express-session');
+
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -45,7 +47,7 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 passport.use(new LinkedInStrategy({
 
- 
+
   clientID: process.env.LINKEDIN_KEY,
   clientSecret: process.env.LINKEDIN_SECRET,
   callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
@@ -141,13 +143,27 @@ app.locals.title = 'Express - Generated with IronGenerator';
 app.use('/', index);
 // app.js
 
-app.use(
-  session({
-    secret: 'our-passport-local-strategy-app',
+// app.use(
+//   session({
+//     secret: 'our-passport-local-strategy-app',
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
+
+
+///////// SESSION + COOKIES
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false,
+    ttl: 24 * 60 * 60 // 1 day
   })
-);
+}));
+
 
 
 passport.serializeUser((user, callback) => {
