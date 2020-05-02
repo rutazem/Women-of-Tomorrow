@@ -22,12 +22,12 @@ const userSchema = new Schema({
     //Personal Data
     name: {
       type: String,
-      required: true,
+      // required: true,
       minlength: 2
     },
     surname: {
       type: String,
-      required: true,
+      // required: true,
       minlength: 2
     },
     age: {

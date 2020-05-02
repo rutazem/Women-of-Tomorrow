@@ -1,0 +1,55 @@
+{{#if user}}
+<div>
+  <a href="/common-space">Common Space</a>
+  <a href="/mentor-space">Go back to your Space</a>
+
+</div>
+
+Update Your profile here
+
+
+<form action="/mentor-edit" method="POST" id="form-container">
+
+
+
+
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" placeholder='{{this.username}}'>
+  <br>
+  {{!-- <label for="password">Password</label>
+  <input id="password" type="password" name="password" placeholder="Your password"> --}}
+  <br>
+  <label for="name-input">Name</label>
+  <input id="name-input" type="text" name="name" placeholder='{{this.name}}'>
+  <br>
+  <label for="surname-input">Surname</label>
+  <input id="surname-input" type="text" name="surname" placeholder="Your surname">
+  <br>
+  <label for="professionalField-input">Professional Field of Focus</label>
+  <br>
+
+  <input id="webdev" type="checkbox" name="professionalField-input" placeholder="Web-development">
+  <label for="webdev">Web Development</label>
+
+  <input id="ux" type="checkbox" name="professionalField-input" placeholder="UX/UI">
+  <label for="ux">UX/UI</label>
+  <input id="pm" type="checkbox" name="professionalField-input" placeholder="Product Management">
+  <label for="pm">Product Management</label>
+  <input id="data" type="checkbox" name="professionalField-input" placeholder="Data Science">
+  <label for="data">Data Science</label>
+  <br>
+
+  <label for="position-input">Position</label>
+  <input id="position-input" type="text" name="position" placeholder="Your Position">
+  <br>
+  <label for="bioDescription-input">Your Bio</label>
+  <input id="bioDescription-input" type="text" name="bioDescription" placeholder="">
+  <br>
+
+
+
+  <button type="submit">Update your profile</button>
+  {{!-- <input type="submit"> --}}
+
+</form>
+{{/if}}
