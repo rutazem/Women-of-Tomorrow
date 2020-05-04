@@ -13,12 +13,10 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
+// const bodyParser = require('body-parser');  
 
-router.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
-    res.render('private', {
-        user: req.user
-    });
-})
+
+
 
 /////// LINKEDIN PATH
 router.get('/auth/linkedin',
@@ -46,8 +44,14 @@ router.get(`/signup-mentee`, (req, res, next) => {
 router.post('/signup-mentee', (req, res, next) => {
     const {
         username,
-        password
+        password,
+        name,
+        surname
     } = req.body;
+
+    //let name = req.body.name
+
+    // res.render(`name: ${name}`)
 
     if (!username || !password) {
         res.render('auth/signup-mentee', {
@@ -72,7 +76,10 @@ router.post('/signup-mentee', (req, res, next) => {
 
             const newUser = new User({
                 username,
-                password: hashPass
+                password: hashPass,
+                role: 'Mentee',
+                name: req.body.name,
+                surname: req.body.surname
             });
 
             return newUser.save();
