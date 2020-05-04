@@ -46,9 +46,10 @@ router.get('/signup-mentor', (req, res, next) => {
   res.render('auth/signup-mentor');
 });
 
-//////// SENDS USER INFO TO THE DATABASE
+//////// SENDS USER INFO TO THE DATABASE FROM SIGN-UP PAGE
 router.post('/signup-mentor', (req, res, next) => {
-  const { username, password } = req.body;
+
+  const { username, password, name, surname } = req.body;
 
   if (!username || !password) {
     res.render('auth/signup-mentor', { message: 'Indicate username and password' });
@@ -67,7 +68,11 @@ router.post('/signup-mentor', (req, res, next) => {
 
       const newUser = new User({
         username,
-        password: hashPass
+        password: hashPass,
+        role: "Mentor",
+        name,
+        surname
+
       });
 
       return newUser.save();
@@ -84,7 +89,7 @@ router.post('/signup-mentor', (req, res, next) => {
 
 ///////////////////////LOG IN 
 
-//////// SHOWS YOU THE SIGN UP FORM
+//////// SHOWS YOU THE LOGIN PAGE FORM
 router.get('/login', (req, res, next) => {
   res.render('auth/login');
 });
@@ -94,20 +99,23 @@ router.get('/login', (req, res, next) => {
 //   res.render('auth/login', { message: req.flash('error') });
 // });
 
-
-
-/////// LOGS THE USER IN 
-/////// CREATE SEPARATE LANDING PAGES after log in
-// SEPARATE MENTORS AND MENTEES
-
-
-
-
+///////// THESE ARE THE PRIVATE ROUTES BELOW
+//////// SAME SHOULD BE SET UP FOR MENTEES
 
 router.get('/mentor-space', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('spaces/mentor-space', { user: req.user });
 });
 
+router.get('/mentor-edit', ensureLogin.ensureLoggedIn(), (req, res) => {
+  res.render('spaces/mentor-edit', { user: req.user });
+});
+
+router.get('/common-space', ensureLogin.ensureLoggedIn(), (req, res) => {
+  res.render('spaces/common-space', { user: req.user });
+});
+
+
+//////// AFTER LOGIN
 router.post(
   '/login',
   passport.authenticate('local', {
@@ -117,6 +125,43 @@ router.post(
     passReqToCallback: true
   })
 );
+
+
+/////////////////////////// EDIT THE PROFILE
+
+// DISPLAY EDITING FORM
+//// HOW CAN WE PRE-FILL THE ALREADY KNOWN DATA?
+//// do we need :ID?????
+//// HOW TO GET SPECIFIC USER ID??
+router.get('spaces/:id/mentor-edit', (req, res, next) => {
+
+  User.findById(req.params.id)
+    .then((user) => {
+      res.render('space/mentor-edit', user)
+    })
+
+});
+
+// POSTING THE EDIT
+router.post('/mentor-edit/', (req, res, next) => {
+
+  User.findById(req.params.id,
+
+
+    {
+      // you're only allowing name,occupation,catchPhrase to be modified
+      // name: req.body.name,
+      // surname: req.body.surname,
+      // username: req.body.username,
+      // position: req.body.position,
+      // bioDescription: req.body.bio,
+
+    })
+    .then(() => {
+      res.redirect('/mentor-space')
+    })
+
+})
 
 
 

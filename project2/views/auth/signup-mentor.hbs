@@ -8,27 +8,40 @@
 
   <label for="username">Username</label>
   <input id="username" type="text" name="username" placeholder="JonSnow">
-  <br><br>
+  <br>
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
+  <br>
+  <label for="name-input">Name</label>
+  <input id="name-input" type="text" name="name" placeholder="Your name">
+  <br>
+  <label for="surname-input">Surname</label>
+  <input id="surname-input" type="text" name="surname" placeholder="Your surname">
 
-  {{!-- <label for="role {enum : Mentor} " > </label>
+  <button type="submit">Create account</button>
+  {{!-- <input type="submit"> --}}
+
+</form>
+
+
+
+
+{{!-- <label for="role {enum : Mentor} " > </label>
   <input id="password" type="password" name="password" placeholder="Your password">
  --}}
 
 
 
+<br>
 
-  {{#if message}}
-  <div class="error-message">{{ message }}</div>
-  {{/if}}
-  <br><br>
+{{#if message}}
+<div class="error-message">{{ message }}</div>
+{{/if}}
+<br><br>
 
-  //linked in sign up
-  <p> <a href=auth/linkedin>Login With linked</a> </p> <button>Create account</button>
-
-      <p class="account-message">
-        Do you already have an account?
-        <a href="/login">Login</a>
-      </p>
+//linked in sign up
+<p> <a href=auth/linkedin>Login With linked</a> </p> <p class="account-message">
+    Do you already have an account?
+    <a href="/login">Login</a>
+</p>
 </form>
