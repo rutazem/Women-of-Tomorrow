@@ -53,6 +53,8 @@ router.post('/signup-mentee', (req, res, next) => {
 
     // res.render(`name: ${name}`)
 
+    console.log("hello from signup mentee")
+
     if (!username || !password) {
         res.render('auth/signup-mentee', {
             message: 'Indicate username and password'
@@ -74,25 +76,54 @@ router.post('/signup-mentee', (req, res, next) => {
             const salt = bcrypt.genSaltSync(bcryptSalt);
             const hashPass = bcrypt.hashSync(password, salt);
 
+            console.log({
+                username,
+                password: hashPass,
+                role: 'Mentee',
+                name,
+                surname
+            })
+
             const newUser = new User({
                 username,
                 password: hashPass,
                 role: 'Mentee',
-                name: req.body.name,
-                surname: req.body.surname
+                name,
+                surname
             });
 
-            return newUser.save();
+            // hold 
+            newUser.save().then(() => {
+                res.redirect('/');
+            })
         })
-        .then(() => {
-            res.redirect('/');
-        })
-        .catch(error => {
-            res.render('auth/signup-mentee', {
-                message: 'Something went wrong'
-            });
-        });
+        
+        // .catch(error => {
+        //     res.render('auth/signup-mentee', {
+        //         message: 'Something went wrong'
+        //     });
+        // });
 });
+
+//----------------------Personal Information Form----------------------
+
+router.get('/info-mentee', (req, res, next) => {
+    res.render('auth/info-mentee')
+})
+
+
+router.post('/info-mentee', (req, res, next) => {
+
+    const { age, country, city, occupation } = req.body
+    User.update({_id: req.query.user_id}, {$set: {age, country, city, occupation}}) // FIND THE WAY TO GET USER ID
+    .then ((user) =>{
+        res.redirect('/')
+    })
+.catch((error) => {
+    console.log (`error`)
+})
+})
+
 
 
 ///////////////////////LOG IN 
