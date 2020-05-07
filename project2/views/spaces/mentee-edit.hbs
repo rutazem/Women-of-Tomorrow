@@ -1,0 +1,37 @@
+<h2>Mentee Edit</h2>
+
+<form action="/mentee-edit" method="POST">
+
+  <label for="username">Hello {{this.username}} </label>
+  <br>
+  <label for="professionalField-input">Professional Field</label>
+  <input id="professionalField-input" type="text" name="professionalField-input" placeholder="Product Manager">
+  <br><br>
+  <label for="name">Name</label>
+  <input id="name" type="text" name="name" placeholder="Alice">
+  <br><br>
+  <label for="surname">Surname</label>
+  <input id="surname" type="text" name="surname" placeholder="Paul">
+  <br><br>
+  <label for="country">Country</label>
+  <input id="country" type="text" name="country" placeholder="Germany">
+  <br><br>
+  <label for="city">City</label>
+  <input id="city" type="text" name="city" placeholder="Berlin">
+  <br><br>
+  <label for="phone">Phone Number</label>
+  <input id="phone" type="number" name="phone" placeholder="+49 123 34545678">
+  <br><br>
+  <label for="email">Email</label>
+  <input id="email" type="text" name="email" placeholder="alice.paul@gmail.com">
+  <br><br>
+  <label for="position-input">Position</label>
+  <input id="position-input" type="text" name="position" placeholder="Your Position">
+  <br>
+  <label for="bioDescription-input">Your Bio</label>
+  <input id="bioDescription-input" type="text" name="bioDescription" placeholder="">
+  <br>
+
+  <button type="submit">Update your profile</button>
+  {{!-- <input type="submit"> --}}
+</form>
