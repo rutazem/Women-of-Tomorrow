@@ -172,22 +172,27 @@ router.get('spaces/:id/mentor-edit', (req, res, next) => {
 });
 
 // POSTING THE EDIT
-router.post('/mentor-edit/', (req, res, next) => {
-
-  User.findById(req.params.id,
-
-
+router.post('/mentor-edit', (req, res, next) => {
+  const { name, surname, username, position, bioDescription } = req.body
+  //professional field from the multiple choice
+  console.log("USER", req.user)
+  User.findByIdAndUpdate(req.user._id,
     {
       // you're only allowing name,occupation,catchPhrase to be modified
-      // name: req.body.name,
-      // surname: req.body.surname,
-      // username: req.body.username,
-      // position: req.body.position,
-      // bioDescription: req.body.bio,
+      name,
+      surname,
+      username,
+      position,
+      //professional field from the multiple choice
+      bioDescription
 
     })
-    .then(() => {
+
+    .then((result) => {
       res.redirect('/mentor-space')
+    })
+    .catch(() => {
+      console.log('error')
     })
 
 })

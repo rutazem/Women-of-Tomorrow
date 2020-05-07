@@ -1,4 +1,5 @@
 {{#if user}}
+
 <div>
   <a href="/common-space">Common Space</a>
   <a href="/mentor-space">Go back to your Space</a>
@@ -14,16 +15,16 @@ Update Your profile here
 
 
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder='{{this.username}}'>
+  <input id="username" type="text" name="username" placeholder='{{user.username}}'>
   <br>
   {{!-- <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password"> --}}
   <br>
   <label for="name-input">Name</label>
-  <input id="name-input" type="text" name="name" placeholder='{{this.name}}'>
+  <input id="name-input" type="text" name="name" value='{{user.name}}'>
   <br>
   <label for="surname-input">Surname</label>
-  <input id="surname-input" type="text" name="surname" placeholder="Your surname">
+  <input id="surname-input" type="text" name="surname" placeholder="{{user.surname}}">
   <br>
   <label for="professionalField-input">Professional Field of Focus</label>
   <br>
