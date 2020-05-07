@@ -30,6 +30,9 @@ const userSchema = new Schema({
     type: Number,
     max: 15
   },
+  email: {
+    type: String,
+  },
   avatarUrl: {
     type: String,
     default: ''

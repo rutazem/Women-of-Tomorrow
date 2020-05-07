@@ -92,48 +92,25 @@ router.post('/signup-mentee', (req, res, next) => {
                 surname
             });
 
-            // hold 
+            //
             newUser.save().then(() => {
                 res.redirect('/');
             })
         })
-        
-        // .catch(error => {
-        //     res.render('auth/signup-mentee', {
-        //         message: 'Something went wrong'
-        //     });
-        // });
+
+    // .catch(error => {
+    //     res.render('auth/signup-mentee', {
+    //         message: 'Something went wrong'
+    //     });
+    // });
 });
 
 //----------------------Personal Information Form----------------------
 
-router.get('/info-mentee', (req, res, next) => {
-    res.render('auth/info-mentee')
-})
-
-
-router.post('/info-mentee', (req, res, next) => {
-
-    const { age, country, city, occupation } = req.body
-    User.update({_id: req.query.user_id}, {$set: {age, country, city, occupation}}) // FIND THE WAY TO GET USER ID
-    .then ((user) =>{
-        res.redirect('/')
-    })
-.catch((error) => {
-    console.log (`error`)
-})
-})
 
 
 
 ///////////////////////LOG IN 
-
-//////// SHOWS YOU THE SIGN UP FORM
-
-router.get('/login', (req, res, next) => {
-    res.render('auth/login');
-});
-
 
 router.get('/login', (req, res, next) => {
     res.render('auth/login', {
@@ -147,14 +124,23 @@ router.get('/login', (req, res, next) => {
 // SEPARATE MENTORS AND MENTEES
 
 router.post(
+
     '/login',
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/mentee-space',
         failureRedirect: '/login',
         failureFlash: true,
         passReqToCallback: true
-    })
+    }),
 )
+
+// router.get('/mentee-space', (req, res) => {
+//     res.redirect('spaces/mentee-space')
+// })
+
+router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
+    res.render('spaces/mentee-space', { user: req.user });
+  });
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
