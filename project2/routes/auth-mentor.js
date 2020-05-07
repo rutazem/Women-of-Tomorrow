@@ -122,15 +122,38 @@ router.get('/common-space', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 
 //////// AFTER LOGIN
+
+
+
+// router.post('/login', passport.authenticate
+
+//   ('local', {
+
+//     successRedirect: '/mentor-space',
+//     failureRedirect: '/login',
+//     failureFlash: true,
+//     passReqToCallback: true
+//   })
+
+// );
+
+
+
+
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/mentor-space',
     failureRedirect: '/login',
     failureFlash: true,
     passReqToCallback: true
-  })
-);
+  }), (req, res) => {
+    if (req.user.role === "Mentor") {
+      res.redirect('/mentor-space');
+    }
+    if (req.user.role === "Mentee") {
+      res.redirect('/mentee-space');
+    }
+  });
 
 
 /////////////////////////// EDIT THE PROFILE

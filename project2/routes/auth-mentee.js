@@ -63,8 +63,8 @@ router.post('/signup-mentee', (req, res, next) => {
     }
 
     User.findOne({
-            username
-        })
+        username
+    })
         .then(user => {
             if (user !== null) {
                 res.render('auth/signup-mentee', {
@@ -123,16 +123,16 @@ router.get('/login', (req, res, next) => {
 /////// CREATE SEPARATE LANDING PAGES after log in
 // SEPARATE MENTORS AND MENTEES
 
-router.post(
+// router.post(
 
-    '/login',
-    passport.authenticate('local', {
-        successRedirect: '/mentee-space',
-        failureRedirect: '/login',
-        failureFlash: true,
-        passReqToCallback: true
-    }),
-)
+//     '/login',
+//     passport.authenticate('local', {
+//         successRedirect: '/mentee-space',
+//         failureRedirect: '/login',
+//         failureFlash: true,
+//         passReqToCallback: true
+//     }),
+// )
 
 // router.get('/mentee-space', (req, res) => {
 //     res.redirect('spaces/mentee-space')
@@ -140,7 +140,7 @@ router.post(
 
 router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
     res.render('spaces/mentee-space', { user: req.user });
-  });
+});
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
