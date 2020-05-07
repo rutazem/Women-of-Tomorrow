@@ -2,24 +2,126 @@
 <p>Welcome to {{title}}</p> --}}
 
 
-Hello! Start Here:
+<div class="container">
+
+  <div class="navbar">
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Women Of Tomorrow</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+          aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup-mentee">Mentee Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup-mentor">Mentor Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Log In</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class='container main'>
+    <div>
+      <h1>WOMEN OF TOMORROW</h1>
+    </div>
+    <div>
+      <h5>
+        We help women elevate women in Tech.
+      </h5>
+    </div>
+  </div>
+
+  <div class="container index-info">
+
+    <div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est repellendus suscipit hic dolorem similique
+        delectus
+        consectetur reprehenderit repellat minima amet, sunt velit deserunt beatae sit modi iure magnam cum sint?
+      </p>
+    </div>
+
+    <div> <img src="images/mentee3.jpg" alt="asian woman with dark lipstick, tattoos and glasses" width="50%"></div>
+
+  </div>
 
 
-<p class="account-message">
-  Sign Up as Mentor
-  <a href="/signup-mentor">Sign Up!</a>
-</p>
+  <div class="container">
+    <h3>Bridge Your Gap</h3>
+    <div>
+      <div class="signup">
+        <p class="account-message">
+          <button class="button"><a href="/signup-mentor">Sign Up as Mentor</a></button>
+        </p>
+      </div>
 
-<p class="account-message">
-  Sign Up as Mentee
-  <a href="/signup-mentee">Sign Up!</a>
-</p>
+      <div class="signup">
+        <p class="account-message">
+          <button class="button"> <a href="/signup-mentee">Sign Up as Mentee</a> </button>
+        </p>
+      </div>
 
+      <div class="login">
+        <p class="account-message">
+          Have an account?
+          <a href="/login">Log in!</a>
+        </p>
+      </div>
+    </div>
+  </div>
 
+  <div class='foot'>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
 
-<p class="account-message">
-  Have an account?
-  <a href="/login">Log in!</a>
-</p>
+              {{!-- should display twitter and github logos with links --}}
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
 
-Design: Beautiful page for introduction
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright © Women Of Tomorrow 2020</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</div>
