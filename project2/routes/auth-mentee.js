@@ -63,8 +63,8 @@ router.post('/signup-mentee', (req, res, next) => {
     }
 
     User.findOne({
-        username
-    })
+            username
+        })
         .then(user => {
             if (user !== null) {
                 res.render('auth/signup-mentee', {
@@ -139,13 +139,61 @@ router.get('/login', (req, res, next) => {
 // })
 
 router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-    res.render('spaces/mentee-space', { user: req.user });
+    res.render('spaces/mentee-space', {
+        user: req.user
+    });
 });
+
+router.get('/mentee-edit', ensureLogin.ensureLoggedIn(), (req, res) => {
+    res.render('spaces/mentee-edit', {
+        user: req.user
+    });
+});
+
+router.get('/common-space', ensureLogin.ensureLoggedIn(), (req, res) => {
+    res.render('spaces/common-space', {
+        user: req.user
+    });
+});
+
+//---------------CRUD EDIT--------------------
+
+router.get('/mentee-edit', (req, res) => {
+    res.render('spaces/mentee-edit')
+})
+
+router.post('/mentee-edit', (req, res) => {
+    const { name, surname, username, country, city, phone, email, position, professionalField, bioDescription } = req.body
+    User.findByIdAndUpdate(req.user._id,
+        {
+          // you're only allowing name,occupation,catchPhrase to be modified
+          name,
+          surname,
+          username,
+          position,
+          country,
+          city,
+          phone,
+          email,
+          professionalField,
+          //professional field from the multiple choice
+          bioDescription
+    
+        })
+    
+        .then((result) => {
+          res.redirect('/mentee-space')
+        })
+        .catch(() => {
+          console.log('error')
+        })
+    
+    })
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/login');
+    res.redirect('/login')
 });
 
 module.exports = router;

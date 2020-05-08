@@ -1,37 +1,49 @@
 <h2>Mentee Edit</h2>
 
+{{#if user}}
+
+<div>
+  <a href="/common-space">Common Space</a>
+  <br>
+  <a href="/mentor-space">Go back to your Space</a>
+</div>
+
+Update Your profile here
+
 <form action="/mentee-edit" method="POST">
 
-  <label for="username">Hello {{this.username}} </label>
+  <label for="username">Hello {{user.username}} </label>
   <br>
   <label for="professionalField-input">Professional Field</label>
-  <input id="professionalField-input" type="text" name="professionalField-input" placeholder="Product Manager">
+  <input id="professionalField-input" type="text" name="professionalField-input" value ={{user.professionalField}}>
   <br><br>
   <label for="name">Name</label>
-  <input id="name" type="text" name="name" placeholder="Alice">
+  <input id="name" type="text" name="name" value ={{user.name}}>
   <br><br>
   <label for="surname">Surname</label>
-  <input id="surname" type="text" name="surname" placeholder="Paul">
+  <input id="surname" type="text" name="surname" value ={{user.surname}}>
   <br><br>
   <label for="country">Country</label>
-  <input id="country" type="text" name="country" placeholder="Germany">
+  <input id="country" type="text" name="country" value ={{user.location.country}}>
   <br><br>
   <label for="city">City</label>
-  <input id="city" type="text" name="city" placeholder="Berlin">
+  <input id="city" type="text" name="city" value ={{user.location.city}}>
   <br><br>
   <label for="phone">Phone Number</label>
-  <input id="phone" type="number" name="phone" placeholder="+49 123 34545678">
+  <input id="phone" type="number" name="phone" value ={{user.phone}}>
   <br><br>
   <label for="email">Email</label>
-  <input id="email" type="text" name="email" placeholder="alice.paul@gmail.com">
+  <input id="email" type="text" name="email" value ={{user.email}}>
   <br><br>
   <label for="position-input">Position</label>
-  <input id="position-input" type="text" name="position" placeholder="Your Position">
+  <input id="position-input" type="text" name="position" value ={{user.position}}>
   <br>
   <label for="bioDescription-input">Your Bio</label>
-  <input id="bioDescription-input" type="text" name="bioDescription" placeholder="">
+  <input id="bioDescription-input" type="text" name="bioDescription" value ={{user.bioDescription}}>
   <br>
 
   <button type="submit">Update your profile</button>
   {{!-- <input type="submit"> --}}
 </form>
+
+{{/if}}
