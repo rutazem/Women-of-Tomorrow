@@ -1,22 +1,35 @@
 <h2>Mentee-Space</h2>
 
-  <label for="username">Hello {{this.username}} </label>
-  <br><br>
-  <label for="professionalField-input">Professional Field {{this.professionalField}} </label>
-  <br><br>
-  <label for="name">Name {{this.name}} </label>
-  <br><br>
-  <label for="surname">Surname {{this.surname}} </label>
-  <br><br>
-  <label for="country">Country {{this.country}} </label>
-  <br><br>
-  <label for="city">City {{this.city}} </label>
-  <br><br>
-  <label for="phone">Phone Number {{this.phone}} </label>
-  <br><br>
-  <label for="email">Email {{this.email}} </label>
-  <br><br>
-  <label for="position-input">Position {{this.position}} </label>
+{{#if user}}
+<div>
+  <a href="/common-space">Common Space</a>
   <br>
-  <label for="bioDescription-input">Your Bio {{this.bioDescription}} </label>
+  <a href="/mentee-edit">Update your profile</a>
   <br>
+  <a href="/logout">Logout</a>
+
+
+</div>
+
+<label for="username">Hello {{user.username}} </label>
+<br><br>
+<label for="professionalField-input">Professional Field {{user.professionalField}} </label>
+<br><br>
+<label for="name">Name {{user.name}} </label>
+<br><br>
+<label for="surname">Surname {{user.surname}} </label>
+<br><br>
+<label for="country">Country {{user.country}} </label>
+<br><br>
+<label for="city">City {{user.city}} </label>
+<br><br>
+<label for="phone">Phone Number {{user.phone}} </label>
+<br><br>
+<label for="email">Email {{user.email}} </label>
+<br><br>
+<label for="position-input">Position {{user.position}} </label>
+<br>
+<label for="bioDescription-input">Your Bio {{user.bioDescription}} </label>
+<br>
+
+{{/if}}
