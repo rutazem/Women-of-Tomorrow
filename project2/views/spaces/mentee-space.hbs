@@ -11,7 +11,7 @@
 
 </div>
 
-<label for="username">Hello {{user.username}} </label>
+{{!-- <label for="username">Hello {{user.username}} </label>
 <br><br>
 <label for="professionalField-input">Professional Field {{user.professionalField}} </label>
 <br><br>
@@ -30,6 +30,28 @@
 <label for="position-input">Position {{user.position}} </label>
 <br>
 <label for="bioDescription-input">Your Bio {{user.bioDescription}} </label>
-<br>
+<br> --}}
+
+
+
+{{#each jobs}}
+<p>{{title}}</p>
+<p>{{company}}</p>
+<a href="{{url}}"><img src={{company_logo}}></a>
+{{/each}}
+
+<form method="GET" action="/mentee-space">
+  <button type="submit"> View other Jobs</button>
+</form>
+
+
+{{#each mentors }}
+<label for="username"> {{username}} </label>
+<br><br>
+<label for="name">Name {{name}} </label>
+<br><br>
+<label for="position-input">Position {{position}} </label>
+<br><br>
+{{/each}}
 
 {{/if}}
