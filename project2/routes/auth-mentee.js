@@ -13,10 +13,13 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
-// const bodyParser = require('body-parser');  
 
+// Axios
+const axios = require('axios')
 
-
+// Var needed for jobs slice 
+let x = 0
+let y = 5
 
 /////// LINKEDIN PATH
 router.get('/auth/linkedin',
@@ -118,31 +121,34 @@ router.get('/login', (req, res, next) => {
     });
 });
 
-
-/////// LOGS THE USER IN 
-/////// CREATE SEPARATE LANDING PAGES after log in
-// SEPARATE MENTORS AND MENTEES
-
-// router.post(
-
-//     '/login',
-//     passport.authenticate('local', {
-//         successRedirect: '/mentee-space',
-//         failureRedirect: '/login',
-//         failureFlash: true,
-//         passReqToCallback: true
-//     }),
-// )
-
-// router.get('/mentee-space', (req, res) => {
-//     res.redirect('spaces/mentee-space')
-// })
-
 router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-    res.render('spaces/mentee-space', {
-        user: req.user
-    });
-});
+   
+    
+    axios
+        .get(`http://jobs.github.com/positions.json`)
+        .then((responseFromAPI) => {
+          User.find({role: "Mentor" })
+          .then(mentors=>{
+              //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
+
+              let randomMentors = 'Save what you want to display here'
+              //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
+              console.log(`This is the list of Mentors `,mentors)
+              res.render('spaces/mentee-space', {
+                user: req.user,
+                jobs: responseFromAPI.data.slice(x, y),
+                //When you have random Mentors saved you can send them here
+                mentors: mentors
+          })
+            //console.log(responseFromAPI.data)
+           
+            })
+            x++
+            y++
+        })
+   
+})
+
 
 router.get('/mentee-edit', ensureLogin.ensureLoggedIn(), (req, res) => {
     res.render('spaces/mentee-edit', {
@@ -163,32 +169,42 @@ router.get('/mentee-edit', (req, res) => {
 })
 
 router.post('/mentee-edit', (req, res) => {
-    const { name, surname, username, country, city, phone, email, position, professionalField, bioDescription } = req.body
-    User.findByIdAndUpdate(req.user._id,
-        {
-          // you're only allowing name,occupation,catchPhrase to be modified
-          name,
-          surname,
-          username,
-          position,
-          country,
-          city,
-          phone,
-          email,
-          professionalField,
-          //professional field from the multiple choice
-          bioDescription
-    
+    const {
+        name,
+        surname,
+        username,
+        country,
+        city,
+        phone,
+        email,
+        position,
+        professionalField,
+        bioDescription
+    } = req.body
+    User.findByIdAndUpdate(req.user._id, {
+            // you're only allowing name,occupation,catchPhrase to be modified
+            name,
+            surname,
+            username,
+            position,
+            country,
+            city,
+            phone,
+            email,
+            professionalField,
+            //professional field from the multiple choice
+            bioDescription
+
         })
-    
+
         .then((result) => {
-          res.redirect('/mentee-space')
+            res.redirect('/mentee-space')
         })
         .catch(() => {
-          console.log('error')
+            console.log('error')
         })
-    
-    })
+
+})
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
