@@ -106,11 +106,6 @@ router.get('/mentor-space', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('spaces/mentor-space', { user: req.user });
 });
 
-//// EG:
-//////DOES DIVISION BETWEEN MENTEE AND MENTOR HAPPEN HERE BUT ALSO AT REDIRECT?
-router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('spaces/mentee-space', { user: req.user, role: req.role });
-});
 
 router.get('/mentor-edit', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('spaces/mentor-edit', { user: req.user });
