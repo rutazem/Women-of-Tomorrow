@@ -18,8 +18,6 @@ const flash = require('connect-flash');
 //   clientSecret: process.env.LINKEDIN_SECRET,
 // })
 
-
-
 // app.js
 
 const bcrypt = require('bcrypt');
@@ -34,7 +32,7 @@ const User = require('./models/user-model')
 const index = require('./routes/index');
 const router = require('./routes/auth-mentor');
 const route_mentee = require('./routes/auth-mentee')
-
+//const cloudinary = require('./routes/cloudinary')
 
 const app = express();
 
@@ -208,6 +206,7 @@ app.use(passport.session());
 app.use('/', router)
 app.use('/', index);
 app.use('/', route_mentee);
+//app.use('/', cloudinary)
 
 
 module.exports = app;
