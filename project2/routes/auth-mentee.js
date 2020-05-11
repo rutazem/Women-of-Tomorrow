@@ -1,6 +1,9 @@
 // routes/auth-routes.js
 const express = require('express');
 const router = express.Router();
+// Avatar upload related item
+//const uploadCloud = require('./cloudinary');
+
 
 require('dotenv').config()
 
@@ -205,6 +208,20 @@ router.post('/mentee-edit', (req, res) => {
         })
 
 })
+
+// router.post('/image', uploadCloud.single('photo'), (req, res, next) => {
+//     const { title, description } = req.body;
+//     const imgPath = req.file.url;
+//     const imgName = req.file.originalname;
+//     const newAva = new Ava({title, description, imgPath, imgName})
+//     newMovie.save()
+//     .then(movie => {
+//       res.redirect('/');
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     })
+//   });
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
