@@ -22,10 +22,8 @@ const userSchema = new Schema({
     min: 0,
     max: 99
   }, // Date of birth would be better 
-  location: {
-    country: String,
-    city: String
-  }, // require from the route where you show the signup-form .. and then I would render all the options into the signup-form
+  country: {type: String},
+  city: {type: String},
   phone: {
     type: Number,
     max: 15
