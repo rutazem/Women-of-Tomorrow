@@ -175,3 +175,28 @@ a {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/* ========================= for Signup */
+
+.mentor-signup {
+
+
+  background-image: url('/images/mentor3.jpg');
+  /* background-color: chocolate; */
+  background-size: cover;
+  background-position: center;
+
+}
+
+
+
+.mentee-signup {
+
+
+  background-image: url('/images/mentee6.jpg');
+  /* background-color: chocolate; */
+  background-size: cover;
+  background-position: center;
+
+}
