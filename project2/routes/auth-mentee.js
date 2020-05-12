@@ -125,31 +125,33 @@ router.get('/login', (req, res, next) => {
 });
 
 router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-   
-    
+
+
     axios
         .get(`http://jobs.github.com/positions.json`)
         .then((responseFromAPI) => {
-          User.find({role: "Mentor" })
-          .then(mentors=>{
-              //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
+            User.find({
+                    role: "Mentor"
+                })
+                .then(mentors => {
+                    //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
 
-              let randomMentors = 'Save what you want to display here'
-              //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
-              console.log(`This is the list of Mentors `,mentors)
-              res.render('spaces/mentee-space', {
-                user: req.user,
-                jobs: responseFromAPI.data.slice(x, y),
-                //When you have random Mentors saved you can send them here
-                mentors: mentors
-          })
-            //console.log(responseFromAPI.data)
-           
-            })
-            x+=5
-            y+=5
+                    let randomMentors = 'Save what you want to display here'
+                    //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
+                    console.log(`This is the list of Mentors `, mentors)
+                    res.render('spaces/mentee-space', {
+                        user: req.user,
+                        jobs: responseFromAPI.data.slice(x, y),
+                        //When you have random Mentors saved you can send them here
+                        mentors: mentors
+                    })
+                    //console.log(responseFromAPI.data)
+
+                })
+            x += 5
+            y += 5
         })
-   
+
 })
 
 
@@ -171,7 +173,7 @@ router.get('/mentee-edit', (req, res) => {
     res.render('spaces/mentee-edit')
 })
 
-router.post('/mentee-edit', (req, res) => {
+router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
     const {
         name,
         surname,
@@ -184,6 +186,8 @@ router.post('/mentee-edit', (req, res) => {
         professionalField,
         bioDescription
     } = req.body
+
+    const imgPath = req.file.url
     User.findByIdAndUpdate(req.user._id, {
             // you're only allowing name,occupation,catchPhrase to be modified
             name,
@@ -196,8 +200,8 @@ router.post('/mentee-edit', (req, res) => {
             email,
             professionalField,
             //professional field from the multiple choice
-            bioDescription
-
+            bioDescription,
+            imgPath
         })
 
         .then((result) => {
@@ -209,36 +213,58 @@ router.post('/mentee-edit', (req, res) => {
 
 })
 
-// router.post('/image', uploadCloud.single('photo'), (req, res, next) => {
-//     const { title, description } = req.body;
-//     const imgPath = req.file.url;
-//     const imgName = req.file.originalname;
-//     const newAva = new Ava({title, description, imgPath, imgName})
-//     newMovie.save()
-//     .then(movie => {
-//       res.redirect('/');
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     })
-//   });
+//---------------------MENTEE VIEW ON MENTORS----------------
+router.get('/mentor/:id', (req, res) => {
+    let id = req.params.id
+    User.findById(id)
+        .then(user => {
+            console.log(user)
+            res.render('spaces/mentee-view',{user})
+        })
+})
 
-//-----------------------!!! WIP Avatar Upload !!!----------------------------------
-router.post('/mentee-space', uploadCloud.single('photo'), (req, res, next) => {
-    const imgPath = req.file.url;
-    // const imgName = req.file.originalname;
-    User.findByIdAndUpdate(req.user._id, {
-        imgPath,
+router.get('/follow/:id', (req, res) => {
+    let id = req.params.id
+    User.findByIdAndUpdate(req.user._id, {$push: [{id}] }, {
+        _followers: id
     })
-    const newUser = new User({imgPath})
-    newUser.save()
-    .then(result => {
-      res.redirect('/mentee-space');
+
+    .then((result) => {
+        res.redirect('/mentee-space')
     })
-    .catch(error => {
-      console.log(error);
+    .catch(() => {
+        console.log('error')
     })
-  })
+})
+
+// router.post('/mentor/:id', (req, res) => {
+//     //let id = req.params.id
+//     User.findByIdAndUpdate(req.user._id, {
+//             // you're only allowing name,occupation,catchPhrase to be modified
+//             name,
+//             surname,
+//             username,
+//             position,
+//             country,
+//             city,
+//             phone,
+//             email,
+//             professionalField,
+//             //professional field from the multiple choice
+//             bioDescription,
+//             imgPath,
+//             _followers: req.params.id
+//         })
+
+//         .then((result) => {
+//             res.redirect('/mentee-space')
+//         })
+//         .catch(() => {
+//             console.log('error')
+//         })
+
+// })
+
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
