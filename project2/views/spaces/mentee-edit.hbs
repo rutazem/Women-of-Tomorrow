@@ -2,15 +2,27 @@
 
 {{#if user}}
 
+{{!-- <div class="avatar">
+
+<img src="{{this.imgPath}}" alt=""> --}}
+
+
+
+
 <div>
   <a href="/common-space">Common Space</a>
   <br>
-  <a href="/mentor-space">Go back to your Space</a>
+  <a href="/mentee-space">Go back to your Space</a>
 </div>
 
 Update Your Profile Data
 
-<form action="/mentee-edit" method="POST">
+<form action="/mentee-edit" method="POST" enctype="multipart/form-data">
+
+<h3>Update Your Profile Picture</h3>
+
+  <label>Poster</label>
+  <input type="file" name="photo" required>
 
   <label for="username">Hello {{user.username}} </label>
   <br>

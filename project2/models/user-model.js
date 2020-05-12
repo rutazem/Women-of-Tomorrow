@@ -47,9 +47,7 @@ const userSchema = new Schema({
   position: {
     type: String
   },
-  followers: {
-    type: Number
-  },
+  _followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   network: {
     type: Number
   },
