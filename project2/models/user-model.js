@@ -56,7 +56,9 @@ const userSchema = new Schema({
   role: {
     type: String,
     enum: ['Mentor', 'Mentee']
-  }
+  },
+  imgName: {type: String},
+  imgPath: {type: String}
 })
 
 const User = mongoose.model('User', userSchema);

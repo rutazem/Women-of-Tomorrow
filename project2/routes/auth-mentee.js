@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 // Avatar upload related item
-//const uploadCloud = require('./cloudinary');
+const uploadCloud = require('./cloudinary');
 
 
 require('dotenv').config()
@@ -222,6 +222,23 @@ router.post('/mentee-edit', (req, res) => {
 //       console.log(error);
 //     })
 //   });
+
+//-----------------------!!! WIP Avatar Upload !!!----------------------------------
+router.post('/mentee-space', uploadCloud.single('photo'), (req, res, next) => {
+    const imgPath = req.file.url;
+    // const imgName = req.file.originalname;
+    User.findByIdAndUpdate(req.user._id, {
+        imgPath,
+    })
+    const newUser = new User({imgPath})
+    newUser.save()
+    .then(result => {
+      res.redirect('/mentee-space');
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  })
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
