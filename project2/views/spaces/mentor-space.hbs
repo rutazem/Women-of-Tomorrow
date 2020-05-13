@@ -6,8 +6,8 @@ Private page FOR MENTORS
 
 
 <div>
-  <a href="/common-space/">Common Space</a>
-  <br>
+  {{!-- <a href="/common-space/">Common Space</a>
+  <br> --}}
   <a href="/mentor-edit/">Update your profile</a>
   <br>
   <a href="/logout">Logout</a>
@@ -46,10 +46,9 @@ Private page FOR MENTORS
 <br><br>
 <label for="position-input">Position {{position}} </label>
 <br><br>
-<label for="email">Email {{email}} </label>
-<br><br>
+{{!-- <label for="email">Email {{email}} </label>
+<br><br> --}}
+<a href="/mentee/{{id}}">Check out your Mentee</a>
 {{/each}}
-
-
 
 {{/if}}

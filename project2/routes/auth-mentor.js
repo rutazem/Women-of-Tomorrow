@@ -239,6 +239,16 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
     })
 })
 
+//---------------------MENTOR VIEW ON MENTEES----------------
+router.get('/mentee/:id', (req, res) => {
+  let id = req.params.id
+  User.findById(id)
+      .then(user => {
+          console.log(user)
+          res.render('spaces/mentor-view',{user})
+      })
+})
+
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
