@@ -90,7 +90,7 @@ router.post('/signup-mentor', (req, res, next) => {
       return newUser.save();
     })
     .then(() => {
-      res.redirect('/');
+      res.redirect('/login');
     })
     .catch(error => {
       res.render('auth/signup-mentor', {
