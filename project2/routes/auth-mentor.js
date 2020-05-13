@@ -14,10 +14,10 @@ const bcryptSalt = 10;
 const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
 
+// Axios
+const axios = require('axios')
 
-
-
-
+const uploadCloud = require('./cloudinary');
 
 
 /////// LINKEDIN PATH
@@ -167,21 +167,67 @@ router.get('spaces/:id/mentor-edit', (req, res, next) => {
 });
 
 // POSTING THE EDIT
-router.post('/mentor-edit', (req, res, next) => {
-  const { name, surname, username, position, bioDescription } = req.body
-  //professional field from the multiple choice
-  console.log("USER", req.user)
-  User.findByIdAndUpdate(req.user._id,
-    {
-      // you're only allowing name,occupation,catchPhrase to be modified
-      name,
-      surname,
-      username,
-      position,
-      //professional field from the multiple choice
-      bioDescription
+// router.post('/mentor-edit', (req, res, next) => {
+//   const { name, surname, username, position, bioDescription } = req.body
+//   //professional field from the multiple choice
+//   console.log("USER", req.user)
+//   User.findByIdAndUpdate(req.user._id,
+//     {
+//       // you're only allowing name,occupation,catchPhrase to be modified
+//       name,
+//       surname,
+//       username,
+//       position,
+//       //professional field from the multiple choice
+//       bioDescription
 
-    })
+//     })
+
+//     .then((result) => {
+//       res.redirect('/mentor-space')
+//     })
+//     .catch(() => {
+//       console.log('error')
+//     })
+
+// })
+
+
+//---------------CRUD EDIT--------------------
+
+router.get('/mentor-edit', (req, res) => {
+  res.render('spaces/mentor-edit')
+})
+
+router.post('/mentor-edit', (req, res) => {
+  const {
+    name,
+    surname,
+    username,
+    country,
+    city,
+    phone,
+    email,
+    position,
+    professionalField,
+    bioDescription
+  } = req.body
+  
+  User.findByIdAndUpdate(req.user._id, {
+    // you're only allowing name,occupation,catchPhrase to be modified
+    name,
+    surname,
+    username,
+    position,
+    country,
+    city,
+    phone,
+    email,
+    professionalField,
+    //professional field from the multiple choice
+    bioDescription
+
+  })
 
     .then((result) => {
       res.redirect('/mentor-space')
@@ -193,6 +239,22 @@ router.post('/mentor-edit', (req, res, next) => {
 })
 
 
+//-----------------------!!! WIP Avatar Upload !!!----------------------------------
+router.post('/mentee-space', uploadCloud.single('photo'), (req, res, next) => {
+  const imgPath = req.file.url;
+  // const imgName = req.file.originalname;
+  User.findByIdAndUpdate(req.user._id, {
+    imgPath,
+  })
+  const newUser = new User({ imgPath })
+  newUser.save()
+    .then(result => {
+      res.redirect('/mentee-space');
+    })
+    .catch(error => {
+      console.log(error);
+    })
+})
 
 
 

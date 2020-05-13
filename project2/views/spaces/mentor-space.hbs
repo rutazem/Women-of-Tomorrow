@@ -9,4 +9,43 @@ Private page FOR MENTORS
 
 
 </div>
+
+
+<label for="username">Hello {{user.username}} </label>
+<br><br>
+<label for="professionalField-input">Professional Field {{user.professionalField}} </label>
+<br><br>
+<label for="name">Name {{user.name}} </label>
+<br><br>
+<label for="surname">Surname {{user.surname}} </label>
+<br><br>
+<label for="country">Country {{user.country}} </label>
+<br><br>
+<label for="city">City {{user.city}} </label>
+<br><br>
+<label for="phone">Phone Number {{user.phone}} </label>
+<br><br>
+<label for="email">Email {{user.email}} </label>
+<br><br>
+<label for="position-input">Position {{user.position}} </label>
+<br>
+<label for="bioDescription-input">Your Bio {{user.bioDescription}} </label>
+<br>
+
+
+
+{{#each mentees }}
+<label for="username"> {{username}} </label>
+<br><br>
+<label for="name">Name {{name}} </label>
+<br><br>
+<label for="position-input">Position {{position}} </label>
+<br><br>
+<label for="email">Email {{email}} </label>
+<br><br>
+{{/each}}
+
+
+
+
 {{/if}}

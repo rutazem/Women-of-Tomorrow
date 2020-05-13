@@ -69,8 +69,8 @@ router.post('/signup-mentee', (req, res, next) => {
     }
 
     User.findOne({
-            username
-        })
+        username
+    })
         .then(user => {
             if (user !== null) {
                 res.render('auth/signup-mentee', {
@@ -125,31 +125,31 @@ router.get('/login', (req, res, next) => {
 });
 
 router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-   
-    
+
+
     axios
         .get(`http://jobs.github.com/positions.json`)
         .then((responseFromAPI) => {
-          User.find({role: "Mentor" })
-          .then(mentors=>{
-              //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
+            User.find({ role: "Mentor" })
+                .then(mentors => {
+                    //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
 
-              let randomMentors = 'Save what you want to display here'
-              //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
-              console.log(`This is the list of Mentors `,mentors)
-              res.render('spaces/mentee-space', {
-                user: req.user,
-                jobs: responseFromAPI.data.slice(x, y),
-                //When you have random Mentors saved you can send them here
-                mentors: mentors
-          })
-            //console.log(responseFromAPI.data)
-           
-            })
-            x+=5
-            y+=5
+                    let randomMentors = 'Save what you want to display here'
+                    //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
+                    console.log(`This is the list of Mentors `, mentors)
+                    res.render('spaces/mentee-space', {
+                        user: req.user,
+                        jobs: responseFromAPI.data.slice(x, y),
+                        //When you have random Mentors saved you can send them here
+                        mentors: mentors
+                    })
+                    //console.log(responseFromAPI.data)
+
+                })
+            x += 5
+            y += 5
         })
-   
+
 })
 
 
@@ -185,20 +185,20 @@ router.post('/mentee-edit', (req, res) => {
         bioDescription
     } = req.body
     User.findByIdAndUpdate(req.user._id, {
-            // you're only allowing name,occupation,catchPhrase to be modified
-            name,
-            surname,
-            username,
-            position,
-            country,
-            city,
-            phone,
-            email,
-            professionalField,
-            //professional field from the multiple choice
-            bioDescription
+        // you're only allowing name,occupation,catchPhrase to be modified
+        name,
+        surname,
+        username,
+        position,
+        country,
+        city,
+        phone,
+        email,
+        professionalField,
+        //professional field from the multiple choice
+        bioDescription
 
-        })
+    })
 
         .then((result) => {
             res.redirect('/mentee-space')
@@ -230,15 +230,15 @@ router.post('/mentee-space', uploadCloud.single('photo'), (req, res, next) => {
     User.findByIdAndUpdate(req.user._id, {
         imgPath,
     })
-    const newUser = new User({imgPath})
+    const newUser = new User({ imgPath })
     newUser.save()
-    .then(result => {
-      res.redirect('/mentee-space');
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  })
+        .then(result => {
+            res.redirect('/mentee-space');
+        })
+        .catch(error => {
+            console.log(error);
+        })
+})
 
 ////////// LOG OUT
 router.get('/logout', (req, res) => {
