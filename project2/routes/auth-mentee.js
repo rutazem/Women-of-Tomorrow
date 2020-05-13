@@ -100,7 +100,7 @@ router.post('/signup-mentee', (req, res, next) => {
 
             //
             newUser.save().then(() => {
-                res.redirect('/');
+                res.redirect('/login');
             })
         })
 
@@ -230,11 +230,9 @@ router.get('/mentor/:id', (req, res) => {
 
 router.get('/follow/:id', (req, res) => {
     let id = req.params.id
-    User.findByIdAndUpdate(req.user._id, {$push: [{id}] }, {
-        _followers: id
-    })
-
+    User.findByIdAndUpdate(req.user._id, {$push: {_followers: id}})
     .then((result) => {
+
         res.redirect('/mentee-space')
     })
     .catch(() => {
@@ -242,33 +240,6 @@ router.get('/follow/:id', (req, res) => {
     })
 })
 
-// router.post('/mentor/:id', (req, res) => {
-//     //let id = req.params.id
-//     User.findByIdAndUpdate(req.user._id, {
-//             // you're only allowing name,occupation,catchPhrase to be modified
-//             name,
-//             surname,
-//             username,
-//             position,
-//             country,
-//             city,
-//             phone,
-//             email,
-//             professionalField,
-//             //professional field from the multiple choice
-//             bioDescription,
-//             imgPath,
-//             _followers: req.params.id
-//         })
-
-//         .then((result) => {
-//             res.redirect('/mentee-space')
-//         })
-//         .catch(() => {
-//             console.log('error')
-//         })
-
-// })
 
 
 ////////// LOG OUT
