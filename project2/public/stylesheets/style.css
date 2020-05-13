@@ -43,8 +43,6 @@ a {
 }
 
 .bg-image {
-  /* background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200'); */
-
   background-image: url('/images/hugging.jpg');
   /* background-color: chocolate; */
   background-size: cover;
@@ -218,29 +216,19 @@ a {
 
 
   background-image: url('/images/mentor3.jpg');
-  /* background-color: chocolate; */
   background-size: cover;
   background-position: center;
 
 }
-
-
 
 .mentee-signup {
 
 
   background-image: url('/images/mentee6.jpg');
-  /* background-color: chocolate; */
   background-size: cover;
   background-position: center;
 
 }
-
-
-/* .container {
-  display: flex;
-} */
-
 
 
 /* /////////////////INDEX */
@@ -281,3 +269,25 @@ a {
 }
 
 /* /////////////////// PROFILE EDIT */
+
+
+
+#edit-space {
+
+  font: 14px;
+  font-family: 'Roboto Mono', monospace;
+
+  box-sizing: border-box;
+
+}
+
+
+#bootstrap-overrides {
+
+  font: 14px;
+  font-family: 'Roboto Mono', monospace;
+
+  box-sizing: border-box;
+
+
+}
