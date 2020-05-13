@@ -69,8 +69,8 @@ router.post('/signup-mentee', (req, res, next) => {
     }
 
     User.findOne({
-            username
-        })
+        username
+    })
         .then(user => {
             if (user !== null) {
                 res.render('auth/signup-mentee', {
@@ -130,9 +130,12 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
     axios
         .get(`http://jobs.github.com/positions.json`)
         .then((responseFromAPI) => {
+
+
             User.find({
                     role: "Mentor"
                 })
+
                 .then(mentors => {
                     //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
 
@@ -189,6 +192,7 @@ router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
 
     const imgPath = req.file.url
     User.findByIdAndUpdate(req.user._id, {
+
             // you're only allowing name,occupation,catchPhrase to be modified
             name,
             surname,
@@ -203,6 +207,7 @@ router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
             bioDescription,
             imgPath
         })
+
 
         .then((result) => {
             res.redirect('/mentee-space')
