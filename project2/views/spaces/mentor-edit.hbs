@@ -1,3 +1,5 @@
+<h2>Mentor Edit</h2>
+
 {{#if user}}
 
 <div>
@@ -9,48 +11,53 @@
 Update Your profile here
 
 
-<form action="/mentor-edit" method="POST" id="form-container">
+{{!-- <form action="/mentor-edit" method="POST" id="form-container"> --}}
+<form action="/mentor-edit" method="POST" enctype="multipart/form-data">
 
+  <h3>Update Your Profile Picture</h3>
 
+  <label>Poster</label>
+  <input type="file" name="photo" required>
 
-
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder='{{user.username}}'>
+  <label for="username">Hello {{user.username}} </label>
   <br>
-  {{!-- <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password"> --}}
-  <br>
-  <label for="name-input">Name</label>
-  <input id="name-input" type="text" name="name" value='{{user.name}}'>
-  <br>
-  <label for="surname-input">Surname</label>
-  <input id="surname-input" type="text" name="surname" placeholder="{{user.surname}}">
-  <br>
-  <label for="professionalField-input">Professional Field of Focus</label>
-  <br>
+  <label for="professionalField">Professional Field</label>
+  <select id="professionalField" name="professionalField" value={{user.professionalField}}>
+    <option id="professionalField" name="professionalField" value="Web-development">Web-development</option>
+    <option id="professionalField" name="professionalField" value="UX/UI">UX/UI</option>
+    <option id="professionalField" name="professionalField" value="Product Management">Product Management</option>
+    <option id="professionalField" name="professionalField" value="Data Science">Data Science</option>
+    {{!-- <input id="professionalField" type="text" name="professionalField" value={{user.professionalField}}> --}}
+  </select>
 
-  <input id="webdev" type="checkbox" name="professionalField-input" placeholder="Web-development">
-  <label for="webdev">Web Development</label>
-
-  <input id="ux" type="checkbox" name="professionalField-input" placeholder="UX/UI">
-  <label for="ux">UX/UI</label>
-  <input id="pm" type="checkbox" name="professionalField-input" placeholder="Product Management">
-  <label for="pm">Product Management</label>
-  <input id="data" type="checkbox" name="professionalField-input" placeholder="Data Science">
-  <label for="data">Data Science</label>
-  <br>
-
+  <br><br>
+  <label for="name">Name</label>
+  <input id="name" type="text" name="name" value={{user.name}}>
+  <br><br>
+  <label for="surname">Surname</label>
+  <input id="surname" type="text" name="surname" value={{user.surname}}>
+  <br><br>
+  <label for="country">Country</label>
+  <input id="country" type="text" name="country" value={{user.country}}>
+  <br><br>
+  <label for="city">City</label>
+  <input id="city" type="text" name="city" value={{user.city}}>
+  <br><br>
+  <label for="phone">Phone Number</label>
+  <input id="phone" type="number" name="phone" value={{user.phone}}>
+  <br><br>
+  <label for="email">Email</label>
+  <input id="email" type="text" name="email" value={{user.email}}>
+  <br><br>
   <label for="position-input">Position</label>
-  <input id="position-input" type="text" name="position" placeholder="Your Position">
-  <br>
+  <input id="position-input" type="text" name="position" value={{user.position}}>
+  <br> <br>
   <label for="bioDescription-input">Your Bio</label>
-  <input id="bioDescription-input" type="text" name="bioDescription" placeholder="">
+  <input id="bioDescription-input" type="text" name="bioDescription" value={{user.bioDescription}}>
   <br>
-
-
 
   <button type="submit">Update your profile</button>
   {{!-- <input type="submit"> --}}
-
 </form>
+
 {{/if}}
