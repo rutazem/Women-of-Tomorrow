@@ -2,20 +2,6 @@
 
 {{#if user}}
 
-<div class="avatar">
-
-<img src="{{this.imgPath}}" alt="">
-
-<h3>Update Your Profile Picture</h3>
-<form action="/mentee-edit" method="POST" enctype="multipart/form-data">
-
-  <label>Poster</label>
-  <input type="file" name="photo">
- 
-  <input type="submit" value="SAVE">
-</form>
-
-</div>
 
 <div>
   <a href="/common-space">Common Space</a>
@@ -27,7 +13,7 @@
 
 </div>
 
-<label for="username">Hello {{user.username}} </label>
+<label for="username">Hello {{user.name}} </label>
 <br><br>
 <label for="professionalField-input">Professional Field {{user.professionalField}} </label>
 <br><br>

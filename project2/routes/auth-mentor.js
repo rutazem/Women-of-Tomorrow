@@ -134,7 +134,6 @@ router.get('/common-space', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 
 
-
 router.post(
   '/login',
   passport.authenticate('local', {
@@ -143,12 +142,14 @@ router.post(
     passReqToCallback: true
   }), (req, res) => {
     if (req.user.role === "Mentor") {
-      res.redirect('/mentor-space');
+      res.redirect('/mentor-space')
+      console.log ("I am Mentor")
     }
     if (req.user.role === "Mentee") {
-      res.redirect('/mentee-space');
+      res.redirect('/mentee-space')
+      console.log ("I am Mentee")
     }
-  });
+  })
 
 
 /////////////////////////// EDIT THE PROFILE
