@@ -16,6 +16,9 @@ const bcryptSalt = 10;
 const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
 
+// Axios
+const axios = require('axios')
+
 
 
 /////// LINKEDIN PATH
@@ -196,6 +199,7 @@ router.post(
 // })
 
 // POSTING THE EDIT
+
 router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
   const {
     name,
@@ -209,6 +213,7 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
     professionalField,
     bioDescription
   } = req.body
+
   //professional field from the multiple choice
   const imgPath = req.file.url
   User.findByIdAndUpdate(req.user._id, {
@@ -226,14 +231,12 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
       bioDescription,
       imgPath
     })
-
     .then((result) => {
       res.redirect('/mentor-space')
     })
     .catch(() => {
       console.log('error')
     })
-
 })
 
 

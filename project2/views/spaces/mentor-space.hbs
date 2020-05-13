@@ -15,9 +15,8 @@ Private page FOR MENTORS
 
 </div>
 
-</div>
-
 <label for="username">Hello {{user.name}} </label>
+
 <br><br>
 <label for="professionalField-input">Professional Field {{user.professionalField}} </label>
 <br><br>
@@ -38,6 +37,8 @@ Private page FOR MENTORS
 <label for="bioDescription-input">Your Bio {{user.bioDescription}} </label>
 <br>
 
+
+
 {{#each mentees }}
 <label for="username"> {{username}} </label>
 <br><br>
@@ -48,5 +49,7 @@ Private page FOR MENTORS
 <label for="email">Email {{email}} </label>
 <br><br>
 {{/each}}
+
+
 
 {{/if}}
