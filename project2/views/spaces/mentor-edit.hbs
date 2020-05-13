@@ -1,4 +1,6 @@
-<h2>Mentee Edit</h2>
+
+<h2>Mentor Edit</h2>
+
 
 {{#if user}}
 
@@ -8,9 +10,18 @@
   <a href="/mentor-space">Go back to your Space</a>
 </div>
 
-Update Your Profile Data
 
-<form action="/mentor-edit" method="POST">
+Update Your profile here
+
+
+{{!-- <form action="/mentor-edit" method="POST" id="form-container"> --}}
+<form action="/mentor-edit" method="POST" enctype="multipart/form-data">
+
+  <h3>Update Your Profile Picture</h3>
+
+  <label>Poster</label>
+  <input type="file" name="photo" required>
+
 
   <label for="username">Hello {{user.username}} </label>
   <br>
