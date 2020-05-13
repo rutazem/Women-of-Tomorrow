@@ -1,6 +1,11 @@
 Private page FOR MENTORS
 {{#if user}}
 <div>
+  <img src="{{user.imgPath}}"
+</div>
+
+
+<div>
   <a href="/common-space/">Common Space</a>
   <br>
   <a href="/mentor-edit/">Update your profile</a>
@@ -10,8 +15,8 @@ Private page FOR MENTORS
 
 </div>
 
+<label for="username">Hello {{user.name}} </label>
 
-<label for="username">Hello {{user.username}} </label>
 <br><br>
 <label for="professionalField-input">Professional Field {{user.professionalField}} </label>
 <br><br>
@@ -44,7 +49,6 @@ Private page FOR MENTORS
 <label for="email">Email {{email}} </label>
 <br><br>
 {{/each}}
-
 
 
 

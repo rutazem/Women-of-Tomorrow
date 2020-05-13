@@ -1,11 +1,23 @@
+
 <h2>Mentor Edit</h2>
+
+
+  <label for="username">Hello {{user.username}} </label>
+
+
 
 {{#if user}}
 
 <div class="d-flex justify-content-center">
 
+  <h3>Update Your Profile Picture</h3>
+
+  <label>Poster</label>
+  <input type="file" name="photo" required>
+
   <div class="container" id="bootstrap-overrides">
-    <form class="form-update" action="/mentor-edit" method="POST">
+  
+    <form class="form-update" action="/mentor-edit" method="POST enctype="multipart/form-data"">
 
       <div class="form-group row">
         <label for="inputusername" class="col-sm-2 col-form-label text-right">Username</label>
@@ -114,7 +126,6 @@
 
 
 </div>
-
 
 
 {{/if}}
