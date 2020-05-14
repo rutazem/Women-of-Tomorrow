@@ -1,6 +1,7 @@
 {{#if user}}
 
 
+
 <div class="container" id="bootstrap-overrides">
 
   {{!-- --------------------------NAV BAR----------------------- --}}
@@ -138,7 +139,7 @@
         <div class="p-2"><label for="name">Name: {{name}} {{surname}} </label></div>
         <div class="p-2"><label for="position-input">Position: {{position}} </label></div>
         <div class="p-2"><label for="professionalField">Field: {{professionalField}} </label></div>
-        <div class="p-2"><a href="/mentee/{{id}}">Check the Mentor</a></div>
+        <div class="p-2"><a href="/mentor/{{id}}">Check the Mentor</a></div>
       </div>
 
       {{/each}}
@@ -190,7 +191,12 @@
 </div>
 </div>
 
+<div>
 
+  
+Followers: {{followers}}
+
+</div>
 
 
 <div class='foot' id="padding">
@@ -210,4 +216,6 @@
 </div>
 
 </div>
+
+
 {{/if}}
