@@ -133,8 +133,8 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 
             User.find({
-                    role: "Mentor"
-                })
+                role: "Mentor"
+            })
 
                 .then(mentors => {
                     //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
@@ -142,13 +142,18 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
                     let randomMentors = 'Save what you want to display here'
                     //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
                     console.log(`This is the list of Mentors `, mentors)
+
                     res.render('spaces/mentee-space', {
                         user: req.user,
                         jobs: responseFromAPI.data.slice(x, y),
+
+
                         //When you have random Mentors saved you can send them here
                         mentors: mentors
                     })
                     //console.log(responseFromAPI.data)
+
+
 
                 })
             x += 5
@@ -193,20 +198,20 @@ router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
     const imgPath = req.file.url
     User.findByIdAndUpdate(req.user._id, {
 
-            // you're only allowing name,occupation,catchPhrase to be modified
-            name,
-            surname,
-            username,
-            position,
-            country,
-            city,
-            phone,
-            email,
-            professionalField,
-            //professional field from the multiple choice
-            bioDescription,
-            imgPath
-        })
+        // you're only allowing name,occupation,catchPhrase to be modified
+        name,
+        surname,
+        username,
+        position,
+        country,
+        city,
+        phone,
+        email,
+        professionalField,
+        //professional field from the multiple choice
+        bioDescription,
+        imgPath
+    })
 
 
         .then((result) => {
@@ -224,20 +229,20 @@ router.get('/mentor/:id', (req, res) => {
     User.findById(id)
         .then(user => {
             console.log(user)
-            res.render('spaces/mentee-view',{user})
+            res.render('spaces/mentee-view', { user })
         })
 })
 
 router.get('/follow/:id', (req, res) => {
     let id = req.params.id
-    User.findByIdAndUpdate(req.user._id, {$push: {_followers: id}})
-    .then((result) => {
+    User.findByIdAndUpdate(req.user._id, { $push: { _followers: id } })
+        .then((result) => {
 
-        res.redirect('/mentee-space')
-    })
-    .catch(() => {
-        console.log('error')
-    })
+            res.redirect('/mentee-space')
+        })
+        .catch(() => {
+            console.log('error')
+        })
 })
 
 

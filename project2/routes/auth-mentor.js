@@ -65,8 +65,8 @@ router.post('/signup-mentor', (req, res, next) => {
   }
 
   User.findOne({
-      username
-    })
+    username
+  })
     .then(user => {
       if (user !== null) {
         res.render('auth/signup-mentor', {
@@ -118,13 +118,13 @@ router.get('/login', (req, res, next) => {
 
 router.get('/mentor-space', ensureLogin.ensureLoggedIn(), (req, res) => {
   User.find({
-      role: "Mentee"
-    })
+    role: "Mentee"
+  })
     .then(mentees => {
-      console.log (mentees)
+      console.log(mentees)
       res.render('spaces/mentor-space', {
         user: req.user,
-        mentees: mentees.slice(0,3)
+        mentees: mentees.slice(0, 3)
       })
     })
 })
@@ -217,20 +217,20 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
   //professional field from the multiple choice
   const imgPath = req.file.url
   User.findByIdAndUpdate(req.user._id, {
-      // you're only allowing name,occupation,catchPhrase to be modified
-      name,
-      surname,
-      username,
-      position,
-      country,
-      city,
-      phone,
-      email,
-      professionalField,
-      //professional field from the multiple choice
-      bioDescription,
-      imgPath
-    })
+    // you're only allowing name,occupation,catchPhrase to be modified
+    name,
+    surname,
+    username,
+    position,
+    country,
+    city,
+    phone,
+    email,
+    professionalField,
+    //professional field from the multiple choice
+    bioDescription,
+    imgPath
+  })
     .then((result) => {
       res.redirect('/mentor-space')
     })
@@ -243,10 +243,10 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
 router.get('/mentee/:id', (req, res) => {
   let id = req.params.id
   User.findById(id)
-      .then(user => {
-          console.log(user)
-          res.render('spaces/mentor-view',{user})
-      })
+    .then(user => {
+      console.log(user)
+      res.render('spaces/mentor-view', { user })
+    })
 })
 
 
