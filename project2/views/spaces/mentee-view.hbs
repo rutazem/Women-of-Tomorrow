@@ -1,13 +1,39 @@
-<h1>Get in touch with your Mentor!</h1>
+{{#if user}}
 
-<h2>{{user.name}}</h2>
-<h2>{{user.professionalField}}</h2>
-<h2>{{user.position}}</h2>
-<h2>{{user.email}}</h2>
-<h2>{{user.bioDescription}}</h2>
 
-<form action="/follow/{{user._id}}" method="get">
-    <button type="submit">Follow</button>
-</form>
 
-<a href="/mentee-space">Back</a>
+
+
+
+
+
+
+
+
+
+{{!-- --------------MENTEE DISPLAY---------------- --}}
+
+
+
+<div class="d-flex align-items-around " id="display">
+
+    {{#each mentees }}
+
+    <div class="d-flex flex-column align-items-around" id="user-display">
+        <div class="p-2"><img src="{{imgPath}}" id="display-image" id="image-container-round"
+                class="border border-dark hover2" width="70%">
+        </div>
+        <div class="p-2"><label for="name">Name: {{name}} {{surname}} </label></div>
+        <div class="p-2"><label for="position-input">Position: {{position}} </label></div>
+        <div class="p-2"><label for="professionalField">Field: {{professionalField}} </label></div>
+        <div class="p-2"><a href="/mentee/{{id}}">Check the Mentee</a></div>
+    </div>
+
+
+
+    {{/each}}
+
+</div>
+
+
+{{/if}}
