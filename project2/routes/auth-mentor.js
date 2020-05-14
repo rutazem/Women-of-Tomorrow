@@ -32,9 +32,31 @@ router.get('/auth/linkedin',
 // the login callback:
 
 router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  successRedirect: '/',
+
+  successRedirect: '/mentor-space',
   failureRedirect: '/login'
 }));
+
+
+
+
+// router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+
+//   failureRedirect: '/login',
+//   failureFlash: true,
+//   passReqToCallback: true
+
+// }), (req, res) => {
+//   if (req.user.role === "Mentor") {
+//     res.redirect('/mentor-space')
+//     console.log("I am Mentor")
+//   }
+//   if (req.user.role === "Mentee") {
+//     res.redirect('/mentee-space')
+//     console.log("I am Mentee")
+
+//   }
+// })
 
 
 ////////////////////////// SIGN UP
