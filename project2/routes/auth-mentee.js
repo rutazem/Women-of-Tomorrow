@@ -141,12 +141,12 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
 
                     let randomMentors = 'Save what you want to display here'
                     //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
-                    console.log(`This is the list of Mentors `, mentors)
-
+                    let followers_number = req.user._followers.length.toString()
+                    console.log(`followers `, followers_number)
                     res.render('spaces/mentee-space', {
                         user: req.user,
                         jobs: responseFromAPI.data.slice(x, y),
-
+                        followers:followers_number,
 
                         //When you have random Mentors saved you can send them here
                         mentors: mentors
@@ -237,7 +237,6 @@ router.get('/follow/:id', (req, res) => {
     let id = req.params.id
     User.findByIdAndUpdate(req.user._id, { $push: { _followers: id } })
         .then((result) => {
-
             res.redirect('/mentee-space')
         })
         .catch(() => {

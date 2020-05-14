@@ -17,7 +17,7 @@
 
 <div class="d-flex align-items-around " id="display">
 
-    {{#each mentees }}
+    {{#with user }}
 
     <div class="d-flex flex-column align-items-around" id="user-display">
         <div class="p-2"><img src="{{imgPath}}" id="display-image" id="image-container-round"
@@ -26,14 +26,15 @@
         <div class="p-2"><label for="name">Name: {{name}} {{surname}} </label></div>
         <div class="p-2"><label for="position-input">Position: {{position}} </label></div>
         <div class="p-2"><label for="professionalField">Field: {{professionalField}} </label></div>
-        <div class="p-2"><a href="/mentee/{{id}}">Check the Mentee</a></div>
+        {{!-- <div class="p-2"><a href="/mentee/{{id}}">Check the Mentee</a></div> --}}
     </div>
 
 
-
-    {{/each}}
+    <form action="/follow/{{_id}}" method="get">
+        <button type="submit">Follow</button>
+    </form>
+    {{/with}}
 
 </div>
-
 
 {{/if}}
