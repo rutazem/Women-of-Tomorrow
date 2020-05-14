@@ -40,6 +40,11 @@ const userSchema = new Schema({
   bioDescription: {
     type: String
   },
+
+  blog: {
+    type: String
+  },
+
   professionalField: {
     type: String,
     enum: ['Web-development', 'UX/UI', 'Product Management', 'Data Science']

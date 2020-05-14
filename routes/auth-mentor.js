@@ -233,7 +233,8 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
     email,
     position,
     professionalField,
-    bioDescription
+    bioDescription,
+    blog
   } = req.body
 
   //professional field from the multiple choice
@@ -251,7 +252,8 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
     professionalField,
     //professional field from the multiple choice
     bioDescription,
-    imgPath
+    imgPath,
+    blog
   })
     .then((result) => {
       res.redirect('/mentor-space')

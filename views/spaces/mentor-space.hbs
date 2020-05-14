@@ -55,10 +55,30 @@
 
       <div>
         <div>
-          <img src="{{user.imgPath}}" id="display-image-user" class="border border-dark hover" width="70%">
+          <div class="d-flex  justify-content-between align-items-center">
+
+            <div><img src="{{user.imgPath}}" id="display-image-user" class="border border-dark hover" width="70%">
+            </div>
+            <div id="followers-bnt">
+
+              {{!-- <button id="followers-bnt"> Followers: {{followers}}</button> --}}
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
 
           <div class="p-2">
             <h5 for="name">{{user.name}} {{user.surname}}</h5>
+            <button id="followers-bnt"> Followers: {{followers}}</button>
           </div>
 
         </div>
@@ -84,11 +104,14 @@
 
       <div class="p-2">
 
-
+        <div>
+          <h4>Insights For Community</h4>
+        </div>
         <p class="border border-dark hover" id="mentor-blog">
 
-          A blog space that is coming!! Here we will share industry tips from the mentor, or their latest insights -
-          bite size.
+          {{user.blog}}
+
+
 
         </p>
 
