@@ -44,7 +44,6 @@ const userSchema = new Schema({
   blog: {
     type: String
   },
-
   professionalField: {
     type: String,
     enum: ['Web-development', 'UX/UI', 'Product Management', 'Data Science']
