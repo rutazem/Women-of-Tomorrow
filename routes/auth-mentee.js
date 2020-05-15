@@ -69,8 +69,8 @@ router.post('/signup-mentee', (req, res, next) => {
     }
 
     User.findOne({
-        username
-    })
+            username
+        })
         .then(user => {
             if (user !== null) {
                 res.render('auth/signup-mentee', {
@@ -133,8 +133,8 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 
             User.find({
-                role: "Mentor"
-            })
+                    role: "Mentor"
+                })
 
                 .then(mentors => {
                     //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
@@ -146,7 +146,7 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
                     res.render('spaces/mentee-space', {
                         user: req.user,
                         jobs: responseFromAPI.data.slice(x, y),
-                        followers:followers_number,
+                        followers: followers_number,
 
                         //When you have random Mentors saved you can send them here
                         mentors: mentors
@@ -169,11 +169,9 @@ router.get('/mentee-edit', ensureLogin.ensureLoggedIn(), (req, res) => {
     });
 });
 
+//RUTA'S CODE GOES HERE
 router.get('/common-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-    res.render('spaces/common-space', {
-        user: req.user
-    });
-});
+})
 
 //---------------CRUD EDIT--------------------
 
@@ -198,20 +196,20 @@ router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
     const imgPath = req.file.url
     User.findByIdAndUpdate(req.user._id, {
 
-        // you're only allowing name,occupation,catchPhrase to be modified
-        name,
-        surname,
-        username,
-        position,
-        country,
-        city,
-        phone,
-        email,
-        professionalField,
-        //professional field from the multiple choice
-        bioDescription,
-        imgPath
-    })
+            // you're only allowing name,occupation,catchPhrase to be modified
+            name,
+            surname,
+            username,
+            position,
+            country,
+            city,
+            phone,
+            email,
+            professionalField,
+            //professional field from the multiple choice
+            bioDescription,
+            imgPath
+        })
 
 
         .then((result) => {
@@ -229,18 +227,49 @@ router.get('/mentor/:id', (req, res) => {
     User.findById(id)
         .then(user => {
             console.log(user)
-            res.render('spaces/mentee-view', { user })
+            res.render('spaces/mentee-view', {
+                user
+            })
         })
 })
 
 router.get('/follow/:id', (req, res) => {
     let id = req.params.id
-    User.findByIdAndUpdate(req.user._id, { $push: { _followers: id } })
+        // let name = req.params.name
+        // let surname = req.params.surname
+        // let position = req.params.position
+        // let professionalField = req.params.professionalField
+        // let email = req.params.email
+
+    User.findByIdAndUpdate(req.user._id, {
+            $push: {
+                _followers: id,
+                // name: name,
+                // surname: surname,
+                // position: position,
+                // professionalField: professionalField,
+                // email: email
+            }
+        })
         .then((result) => {
             res.redirect('/mentee-space')
         })
         .catch(() => {
             console.log('error')
+        })
+})
+
+router.get('/all-following/:id', ensureLogin.ensureLoggedIn(), (req, res) => {
+    let id = req.params.id
+    User.findById(id)
+    // .populate('role').
+    // // exec (function(err, user){
+    // //     if (err) return handleError(err)
+    // //     console.log('The role is', user.role)
+    // // })
+        .then(user => {
+            console.log("This is the USER" + user)
+            res.render('spaces/all-following-view', {user: user})
         })
 })
 
