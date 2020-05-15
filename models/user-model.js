@@ -22,8 +22,8 @@ const userSchema = new Schema({
     min: 0,
     max: 99
   }, // Date of birth would be better 
-  country: {type: String},
-  city: {type: String},
+  country: { type: String },
+  city: { type: String },
   phone: {
     type: Number,
     max: 15
@@ -44,6 +44,12 @@ const userSchema = new Schema({
   blog: {
     type: String
   },
+
+  menteeBlog: {
+    type: String
+  },
+
+
   professionalField: {
     type: String,
     enum: ['Web-development', 'UX/UI', 'Product Management', 'Data Science']
@@ -59,8 +65,8 @@ const userSchema = new Schema({
     type: String,
     enum: ['Mentor', 'Mentee']
   },
-  imgName: {type: String},
-  imgPath: {type: String}
+  imgName: { type: String },
+  imgPath: { type: String }
 })
 
 const User = mongoose.model('User', userSchema);
