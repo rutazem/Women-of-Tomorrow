@@ -49,6 +49,7 @@ const userSchema = new Schema({
     type: String
   },
 
+
   professionalField: {
     type: String,
     enum: ['Web-development', 'UX/UI', 'Product Management', 'Data Science']
