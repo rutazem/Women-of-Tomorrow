@@ -139,18 +139,20 @@ router.get('/mentee-space', ensureLogin.ensureLoggedIn(), (req, res) => {
                 .then(mentors => {
                     //AFter finding all the mentors tou could apply whatever filter you want with some javascript(checkout array.filter in google)
 
-                    let randomMentors = 'Save what you want to display here'
+                    let randomMentors = mentors.slice(0, 5)
                     //HERE you could write some javascript that filters 3 random mentors (or even choose some condition)
                     let followers_number = req.user._followers.length.toString()
                     console.log(`followers `, followers_number)
                     res.render('spaces/mentee-space', {
                         user: req.user,
                         jobs: responseFromAPI.data.slice(x, y),
-                        followers:followers_number,
+                        followers: followers_number,
 
                         //When you have random Mentors saved you can send them here
-                        mentors: mentors
+                        mentors: randomMentors
+
                     })
+
                     //console.log(responseFromAPI.data)
 
 
@@ -192,7 +194,10 @@ router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
         email,
         position,
         professionalField,
-        bioDescription
+        bioDescription,
+        blog,
+        menteeBlog
+
     } = req.body
 
     const imgPath = req.file.url
@@ -210,7 +215,9 @@ router.post('/mentee-edit', uploadCloud.single('photo'), (req, res) => {
         professionalField,
         //professional field from the multiple choice
         bioDescription,
-        imgPath
+        imgPath,
+        blog,
+        menteeBlog
     })
 
 

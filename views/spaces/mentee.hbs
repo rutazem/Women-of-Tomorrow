@@ -1,10 +1,7 @@
-{{!-- --------------MENTEE DISPLAY---------------- --}}
-
-
 {{#if user}}
 
 
-<div class="container" id="user-profile">
+<div class="container" id="bootstrap-overrides">
 
     {{!-- --------------------------NAV BAR----------------------- --}}
     <div class="navbar">
@@ -12,7 +9,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:white ;" id="mainNav">
             <div class="container">
 
-                <label for="username" class="navbar-brand">Women Of Tomorrow</label>
+                <label for="username" class="navbar-brand">Women Of Tomorrow </label>
                 {{!-- <a class="navbar-brand" href="index.html">Edit Your Profile</a> --}}
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -44,21 +41,17 @@
     {{!-- --------------LANDING WELLCOME---------------- --}}
 
     {{!-- div for the main info container --}}
+
+
+
+
     <div class="d-flex flex-column padding">
 
         {{!-- div for the pic and --}}
 
-        <div>
+        <div id="padding">
 
-            <div class="d-flex align-items-around " id="display">
-
-                <div class="d-flex flex-column align-items-around" id="user-display">
-
-                </div>
-
-            </div>
-
-            <h2>Meet Your Mentee.</h2>
+            <h3>Find your tech sisters here.</h3>
         </div>
 
 
@@ -68,22 +61,20 @@
                 <div>
                     <div class="d-flex  justify-content-between align-items-center">
 
-
-
-
                         <div><img src="{{user.imgPath}}" id="display-image-user" class="border border-dark hover"
                                 width="70%">
                         </div>
-                        <div id="followers-bnt">
 
-                            {{!-- <button id="followers-bnt"> Followers: {{followers}}</button> --}}
-                        </div>
                     </div>
 
 
                     <div class="p-2">
                         <h5 for="name">{{user.name}} {{user.surname}}</h5>
 
+                    </div>
+
+                    <div class="p-2">
+                        <button id="followers-bnt">Following: {{followers}}</button>
                     </div>
 
                 </div>
@@ -108,70 +99,36 @@
             </div>
 
 
-            <div class="p-2">
 
-                <div>
-                    <h4>What I'm Working On</h4>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <div class='foot' id="padding">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <ul class="list-inline text-center">
+
+                            {{!-- should display twitter and github logos with links --}}
+
+                            <p class="copyright text-muted">Copyright © Women Of Tomorrow 2020</p>
+                    </div>
                 </div>
-                <p class="border border-dark hover" id="mentor-blog">
-
-                    {{user.menteeBlog}}
-
-                </p>
-
             </div>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-        {{!-- --------------MENTEE DISPLAY---------------- --}}
-
-
-
-        <div class="d-flex align-items-around " id="display">
-
-            <div class="d-flex flex-column align-items-around" id="user-display">
-
-            </div>
-
-        </div>
-
+        </footer>
     </div>
 </div>
 
-
-
-
-
-
-<div class='foot' id="padding">
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <ul class="list-inline text-center">
-
-                        {{!-- should display twitter and github logos with links --}}
-
-                        <p class="copyright text-muted">Copyright © Women Of Tomorrow 2020</p>
-                        <a href="https://humanetech.com/wp-content/uploads/2019/04/humane_design_worksheet.pdf">Built
-                            With Humane Tech Tools</a>
-
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
 
 
 

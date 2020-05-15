@@ -146,24 +146,59 @@ router.get('/mentor-space', ensureLogin.ensureLoggedIn(), (req, res) => {
       console.log(mentees)
       res.render('spaces/mentor-space', {
         user: req.user,
-        mentees: mentees.slice(0, 3)
+        mentees: mentees.slice(0, 5)
       })
     })
 })
 
 
 router.get('/mentor-edit', ensureLogin.ensureLoggedIn(), (req, res) => {
+
+
+
   res.render('spaces/mentor-edit', {
-    user: req.user
+
+    user: req.user,
+
   });
-});
+})
+
+
+
 
 router.get('/common-space', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('spaces/common-space', {
-    user: req.user
-  });
+
+  User.find({ role: 'Mentor' }, ' name surname imgPath _id blog')
+
+    .then(mentorBlog => {
+
+      console.log('blog posts' + mentorBlog)
+      res.render('spaces/common-space', {
+        user: req.user,
+
+        mentorBlog: mentorBlog
+      })// handle user
+    })
+    .catch(error => {
+      // handle error
+    });
+
 });
 
+
+
+// router.get('/common-space', (req, res, next) => {
+
+//   User.find({ role: 'Mentor' }, ' name surname imgPath blog')
+//     .then(mentorBlog => {
+//       console.log('blog posts' + mentorBlog)
+//       res.render('spaces/common-space', mentorBlog)// handle user
+//     })
+//     .catch(error => {
+//       // handle error
+//     });
+
+// });
 
 //////// AFTER LOGIN
 
@@ -201,26 +236,7 @@ router.post(
   })
 
 
-/////////////////////////// EDIT THE PROFILE
 
-// DISPLAY EDITING FORM
-//// HOW CAN WE PRE-FILL THE ALREADY KNOWN DATA?
-//// do we need :ID?????
-//// HOW TO GET SPECIFIC USER ID??
-// router.get('spaces/:id/mentor-edit', (req, res, next) => {
-
-//   User.findById(req.params.id)
-//     .then((user) => {
-//       res.render('space/mentor-edit', user)
-//     })
-
-// });
-
-// router.get('/mentor-edit', (req, res) => {
-//   res.render('spaces/mentor-edit')
-// })
-
-// POSTING THE EDIT
 
 router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
   const {
@@ -239,6 +255,8 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
 
   //professional field from the multiple choice
   const imgPath = req.file.url
+
+
   User.findByIdAndUpdate(req.user._id, {
     // you're only allowing name,occupation,catchPhrase to be modified
     name,
@@ -263,15 +281,53 @@ router.post('/mentor-edit', uploadCloud.single('photo'), (req, res, next) => {
     })
 })
 
+
+
+
 //---------------------MENTOR VIEW ON MENTEES----------------
 router.get('/mentee/:id', (req, res) => {
+
   let id = req.params.id
+  console.log(id)
+
   User.findById(id)
     .then(user => {
       console.log(user)
       res.render('spaces/mentor-view', { user })
     })
 })
+
+
+// -----------------------COMMON SPACE---------------------------
+
+// router.get('/common-space'), (req, res) => {
+
+//   User.blog.find()
+//     .then((blogpost) => {
+//       res.render('common-space', { blogpost })
+//     })
+
+
+
+// }
+
+
+
+
+// routes/index.js
+
+// router.get('/common-space', (req, res, next) => {
+//   User.find()
+//     .then(blogPosts => {
+//       // console.log('Retrieved books from DB:', allTheBooksFromDB);
+//       res.render('common-space', { AllBlogs: blogPosts });
+//     })
+//     .catch(error => {
+//       console.log('Error while getting the blogpost', error);
+//     })
+// });
+
+
 
 
 ////////// LOG OUT
