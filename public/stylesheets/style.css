@@ -366,7 +366,7 @@ a {
 
 
 #job-div {
-  background-color: #fff;
+
   margin: 10px
 }
 
@@ -442,4 +442,15 @@ a {
 #zoom:hover {
   transform: scale(1.5);
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+
+
+
+#link {
+  color: #495057;
+}
+
+#link:hover {
+  color: black;
 }
