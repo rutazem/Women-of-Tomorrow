@@ -31,6 +31,8 @@
     "passport-linkedin": "^1.0.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "passport-local": "^1.0.0",
+    "seed": "^0.4.4",
+    "seed-mongodb": "^0.6.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {

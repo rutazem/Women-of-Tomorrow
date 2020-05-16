@@ -269,6 +269,7 @@ router.get('/follow/:id', (req, res) => {
 })
 
 router.get('/all-following/:id', ensureLogin.ensureLoggedIn(), (req, res) => {
+    
     let id = req.params.id
     User.findById(id)
     // .populate('role').
